@@ -17,6 +17,19 @@ deal-boxer check --address "123 Main St, Dallas, TX"
 - **sale_leaseback** — owner-occupied, strong credit tenant, long-term lease
 - **operating_business** — business + real estate, owner retiring or distressed
 
+## Input / Output
+
+**Input:**
+- CSV or JSON with property records (must include: `sqft`, `property_type`, `city`, `state`, `zoning`, `vacancy_pct`, `entity_type`)
+- Optional: `--strategy` flag to filter for a specific deal box
+- Optional: custom criteria config (YAML)
+
+**Output:**
+- CSV or JSON with original columns + `deal_box` column (one of: `small_bay_industrial`, `sale_leaseback`, `operating_business`, `none`)
+- Properties can match multiple deal boxes (comma-separated)
+- Exit code 0 on success, 1 on failure
+- stdout: filter summary (count per deal box, total matches, total excluded)
+
 ## Stack
 - Python 3.14, Pydantic
 - Typer + Rich for CLI
